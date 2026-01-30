@@ -1,24 +1,25 @@
-//
-//  ContentView.swift
-//  Test
-//
-//  Created by Tamara Sierra Guijarro on 30/01/2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var viewModel: AppViewModel
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $viewModel.path) {
+            DeckSelectionView()
+                .navigationDestination(for: Deck.self) { deck in
+                    SessionSetupView(deck: deck)
+                }
+                .navigationDestination(for: SessionConfig.self) { config in
+                    SessionHostView(config: config)
+                }
+                .navigationDestination(for: SessionResult.self) { result in
+                    SessionReportView(result: result)
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AppViewModel())
 }
