@@ -15,36 +15,45 @@ struct SessionSetupView: View {
     }
 
     var body: some View {
-        Form {
-            Section("Mode") {
-                Picker("Mode", selection: $mode) {
-                    ForEach(SessionMode.allCases) { option in
-                        Text(option.rawValue).tag(option)
+        Theme.card {
+            Form {
+                Section("Mode") {
+                    Picker("Mode", selection: $mode) {
+                        ForEach(SessionMode.allCases) { option in
+                            Text(option.rawValue).tag(option)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .pickerStyle(.segmented)
-            }
+                .listRowBackground(Color.clear)
 
-            Section("Session length") {
-                Picker("Length", selection: $selectedLength) {
-                    ForEach(SessionSetupView.lengthOptions(for: deck), id: \.self) { length in
-                        Text("\(length)")
-                            .tag(length)
+                Section("Session length") {
+                    Picker("Length", selection: $selectedLength) {
+                        ForEach(SessionSetupView.lengthOptions(for: deck), id: \.self) { length in
+                            Text("\(length)")
+                                .tag(length)
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    Text("Deck size: \(deck.cards.count)")
+                        .font(Theme.font(.footnote))
+                        .foregroundStyle(.secondary)
                 }
-                .pickerStyle(.segmented)
-                Text("Deck size: \(deck.cards.count)")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
+                .listRowBackground(Color.clear)
 
-            Section {
-                NavigationLink(value: SessionConfig(deck: deck, mode: mode, length: selectedLength, overrideCards: nil)) {
-                    Text("Start session")
-                        .frame(maxWidth: .infinity, alignment: .center)
+                Section {
+                    NavigationLink(value: SessionConfig(deck: deck, mode: mode, length: selectedLength, overrideCards: nil)) {
+                        Text("Start session")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .buttonStyle(Theme.PrimaryButtonStyle())
                 }
+                .listRowBackground(Color.clear)
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
         }
+        .padding()
         .navigationTitle(deck.name)
     }
 

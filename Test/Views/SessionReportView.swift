@@ -21,7 +21,7 @@ struct SessionReportView: View {
                     Button("Practice mistakes") {
                         viewModel.startPracticeSession(from: result)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(Theme.PrimaryButtonStyle())
                 }
             }
             .padding()
@@ -30,26 +30,25 @@ struct SessionReportView: View {
     }
 
     private var summaryCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(result.deckName)
-                .font(.headline)
-            Text("Mode: \(result.mode.rawValue)")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+        Theme.card {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(result.deckName)
+                    .font(Theme.font(.headline))
+                Text("Mode: \(result.mode.rawValue)")
+                    .font(Theme.font(.subheadline))
+                    .foregroundStyle(.secondary)
 
-            Divider()
+                Divider()
 
-            summaryRow(label: "Total", value: "\(result.total)")
-            summaryRow(label: "Correct", value: "\(result.correct)")
-            summaryRow(label: "Not sure", value: "\(result.notSure)")
-            summaryRow(label: "Incorrect", value: "\(result.incorrect)")
-            summaryRow(label: "Accuracy", value: "\(accuracyText)")
-            summaryRow(label: "Best streak", value: "\(result.bestStreak)")
-            summaryRow(label: "Score", value: "\(result.score)")
+                summaryRow(label: "Total", value: "\(result.total)")
+                summaryRow(label: "Correct", value: "\(result.correct)")
+                summaryRow(label: "Not sure", value: "\(result.notSure)")
+                summaryRow(label: "Incorrect", value: "\(result.incorrect)")
+                summaryRow(label: "Accuracy", value: "\(accuracyText)")
+                summaryRow(label: "Best streak", value: "\(result.bestStreak)")
+                summaryRow(label: "Score", value: "\(result.score)")
+            }
         }
-        .padding()
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     private func summaryRow(label: String, value: String) -> some View {
@@ -59,21 +58,23 @@ struct SessionReportView: View {
             Text(value)
                 .fontWeight(.semibold)
         }
-        .font(.subheadline)
+        .font(Theme.font(.subheadline))
     }
 
     private func itemsSection(title: String, items: [CardItem]) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.headline)
-            ForEach(items, id: \.id) { item in
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(item.spanish)
-                        .fontWeight(.semibold)
-                    Text(item.english)
-                        .foregroundStyle(.secondary)
+        Theme.card {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(title)
+                    .font(Theme.font(.headline))
+                ForEach(items, id: \.id) { item in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(item.spanish)
+                            .fontWeight(.semibold)
+                        Text(item.english)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
                 }
-                .padding(.vertical, 4)
             }
         }
     }
