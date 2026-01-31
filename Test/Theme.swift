@@ -12,7 +12,7 @@ enum Theme {
     static func card<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
         content()
             .padding()
-            .background(.ultraThinMaterial)
+            .background(Theme.red)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
