@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F74A91062F2D05D600F7F8B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F74A91072F2D05D600F7F8B2 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		F74A91072F2D05D600F7F8B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F74A90FA2F2D027300F7F8B2 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		F74A90F12F2D027300F7F8B2 = {
 			isa = PBXGroup;
 			children = (
+				F74A91072F2D05D600F7F8B2 /* Assets.xcassets */,
 				F74A90FC2F2D027300F7F8B2 /* Test */,
 				F74A90FB2F2D027300F7F8B2 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F74A91062F2D05D600F7F8B2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
