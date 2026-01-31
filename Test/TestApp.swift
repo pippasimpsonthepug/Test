@@ -6,8 +6,11 @@ struct TestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(viewModel)
+            AppBackgroundView {
+                ContentView()
+                    .environmentObject(viewModel)
+            }
+            .environment(\.font, Theme.font(.body))
         }
     }
 }

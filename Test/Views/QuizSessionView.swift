@@ -22,14 +22,13 @@ struct QuizSessionView: View {
 
             Spacer()
 
-            Text(cards[index].spanish)
-                .font(.title)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(.thinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+            Theme.card {
+                Text(cards[index].spanish)
+                    .font(Theme.font(.title))
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+            }
 
             VStack(spacing: 12) {
                 ForEach(options, id: \.self) { option in
@@ -37,6 +36,7 @@ struct QuizSessionView: View {
                         handleSelection(option)
                     } label: {
                         Text(option)
+                            .font(Theme.font(.body))
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
@@ -50,13 +50,13 @@ struct QuizSessionView: View {
 
             if showFeedback {
                 Text(feedbackText)
-                    .font(.headline)
+                    .font(Theme.font(.headline))
                     .foregroundStyle(feedbackColor)
 
                 Button("Next") {
                     moveNext()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(Theme.PrimaryButtonStyle())
             }
 
             Spacer()
@@ -68,14 +68,14 @@ struct QuizSessionView: View {
     private var progressHeader: some View {
         HStack {
             Text("Question \(index + 1)/\(cards.count)")
-                .font(.subheadline)
+                .font(Theme.font(.subheadline))
                 .foregroundStyle(.secondary)
             Spacer()
             VStack(alignment: .trailing) {
                 Text("Score \(score)")
-                    .font(.subheadline)
+                    .font(Theme.font(.subheadline))
                 Text("Streak \(streak)")
-                    .font(.caption)
+                    .font(Theme.font(.caption))
                     .foregroundStyle(.secondary)
             }
         }

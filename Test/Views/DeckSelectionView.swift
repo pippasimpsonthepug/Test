@@ -4,15 +4,23 @@ struct DeckSelectionView: View {
     @EnvironmentObject private var viewModel: AppViewModel
 
     var body: some View {
-        List {
-            Section("Decks") {
-                ForEach(viewModel.decks) { deck in
-                    NavigationLink(value: deck) {
-                        DeckRow(deck: deck, stats: viewModel.stats(for: deck))
+        Theme.card {
+            List {
+                Section("Decks") {
+                    ForEach(viewModel.decks) { deck in
+                        NavigationLink(value: deck) {
+                            DeckRow(deck: deck, stats: viewModel.stats(for: deck))
+                        }
+                        .listRowBackground(Color.clear)
                     }
                 }
+                .listRowBackground(Color.clear)
             }
+            .scrollContentBackground(.hidden)
+            .listStyle(.plain)
+            .background(Color.clear)
         }
+        .padding()
         .navigationTitle("Spanish Flashcards")
     }
 }
@@ -24,11 +32,11 @@ private struct DeckRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(deck.name)
-                .font(.headline)
+                .font(Theme.font(.headline))
             HStack(spacing: 12) {
                 Label("\(deck.cards.count) cards", systemImage: "rectangle.stack")
                 Text(bestAccuracyText)
-                    .font(.subheadline)
+                    .font(Theme.font(.subheadline))
                     .foregroundStyle(.secondary)
             }
         }

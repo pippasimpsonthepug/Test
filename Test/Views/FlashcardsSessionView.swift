@@ -35,7 +35,7 @@ struct FlashcardsSessionView: View {
                 actionButtons
             } else {
                 Text("Tap to reveal the English translation")
-                    .font(.footnote)
+                    .font(Theme.font(.footnote))
                     .foregroundStyle(.secondary)
             }
         }
@@ -45,36 +45,35 @@ struct FlashcardsSessionView: View {
     private var progressHeader: some View {
         HStack {
             Text("Card \(index + 1)/\(cards.count)")
-                .font(.subheadline)
+                .font(Theme.font(.subheadline))
                 .foregroundStyle(.secondary)
             Spacer()
             VStack(alignment: .trailing) {
                 Text("Score \(score)")
-                    .font(.subheadline)
+                    .font(Theme.font(.subheadline))
                 Text("Streak \(streak)")
-                    .font(.caption)
+                    .font(Theme.font(.caption))
                     .foregroundStyle(.secondary)
             }
         }
     }
 
     private var cardView: some View {
-        VStack(spacing: 12) {
-            Text(cards[index].spanish)
-                .font(.title)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-            if showTranslation {
-                Text(cards[index].english)
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
+        Theme.card {
+            VStack(spacing: 12) {
+                Text(cards[index].spanish)
+                    .font(Theme.font(.title))
+                    .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
+                if showTranslation {
+                    Text(cards[index].english)
+                        .font(Theme.font(.title3))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
             }
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     private var actionButtons: some View {
@@ -82,7 +81,7 @@ struct FlashcardsSessionView: View {
             Button("Knew it") {
                 handleAnswer(.correct)
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(Theme.PrimaryButtonStyle())
 
             Button("Not sure") {
                 handleAnswer(.notSure)
