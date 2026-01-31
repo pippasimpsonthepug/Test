@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SessionHostView: View {
     @EnvironmentObject private var viewModel: AppViewModel
+    @Environment(\.dismiss) private var dismiss
 
     let config: SessionConfig
     private let cards: [CardItem]
@@ -17,14 +18,34 @@ struct SessionHostView: View {
 
     var body: some View {
         Group {
-            switch config.mode {
-            case .flashcards:
-                FlashcardsSessionView(deck: config.deck, cards: cards) { result in
-                    viewModel.completeSession(result)
+            if cards.isEmpty {
+                Theme.card {
+                    VStack(spacing: 12) {
+                        Text("No cards available")
+                            .font(Theme.font(.headline))
+                        Text("Add cards to this deck before starting a session.")
+                            .font(Theme.font(.subheadline))
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                        Button("Back to deck") {
+                            dismiss()
+                        }
+                        .buttonStyle(Theme.PrimaryButtonStyle())
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
                 }
-            case .quiz:
-                QuizSessionView(deck: config.deck, cards: cards) { result in
-                    viewModel.completeSession(result)
+                .padding()
+            } else {
+                switch config.mode {
+                case .flashcards:
+                    FlashcardsSessionView(deck: config.deck, cards: cards) { result in
+                        viewModel.completeSession(result)
+                    }
+                case .quiz:
+                    QuizSessionView(deck: config.deck, cards: cards) { result in
+                        viewModel.completeSession(result)
+                    }
                 }
             }
         }
