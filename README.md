@@ -10,6 +10,15 @@ A lightweight SwiftUI flashcards + quiz app for Edexcel A-level Spanish (UK MFL)
 - Practice mistakes flow using incorrect + not-sure items.
 - Local persistence of deck stats and the last 10 sessions.
 
+## Requirements
+- Xcode 15 or newer.
+- iOS 17 or newer (SwiftUI + NavigationStack).
+
+## Build and run
+1. Open `Test.xcodeproj` in Xcode.
+2. Select an iOS Simulator or a connected device.
+3. Build and run (`⌘R`).
+
 ## Adding more vocab decks
 1. Open `Test/Services/DeckLibrary.swift`.
 2. Add a new `Deck` entry with a unique `id`, a `name`, and an array of `CardItem` pairs.
